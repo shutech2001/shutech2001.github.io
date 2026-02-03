@@ -244,6 +244,7 @@ main > section:first-child {
   font-size: 0.72rem;
   font-weight: 500;
   line-height: 1;
+  min-height: 24px;
   font-family: var(--mono);
   letter-spacing: 0.03em;
   border: 1px solid transparent;
@@ -271,6 +272,36 @@ main > section:first-child {
   color: #b45309;
   background: rgba(180, 83, 9, 0.12);
   border-color: rgba(180, 83, 9, 0.25);
+}
+
+.tag-badge.presenter-lead {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+.tag-badge.presenter-co {
+  color: #475569;
+  background: rgba(71, 85, 105, 0.12);
+  border-color: rgba(71, 85, 105, 0.25);
+}
+
+.tag-badge.oral {
+  color: #1e40af;
+  background: rgba(30, 64, 175, 0.12);
+  border-color: rgba(30, 64, 175, 0.25);
+}
+
+.tag-badge.poster {
+  color: #0f766e;
+  background: rgba(15, 118, 110, 0.12);
+  border-color: rgba(15, 118, 110, 0.25);
+}
+
+.tag-badge.invited {
+  color: #9333ea;
+  background: rgba(147, 51, 234, 0.12);
+  border-color: rgba(147, 51, 234, 0.25);
 }
 
 .profile-grid {
@@ -319,9 +350,24 @@ main > section:first-child {
   background: #ffffff;
 }
 
+.citation-box {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.citation-box .section-title {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  letter-spacing: 0.06em;
+}
+
 .paper h3 {
   margin: 0;
   font-size: 1.05rem;
+  line-height: 1.35;
+  min-height: 2.7em;
 }
 
 .paper .links {
@@ -445,6 +491,18 @@ main > section:first-child {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+.author-name {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.conference-list {
+  display: grid;
+  gap: 18px;
 }
 
 .cv-table tr:last-child td {
