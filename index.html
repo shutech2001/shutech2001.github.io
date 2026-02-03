@@ -5,25 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Shu Tamano</title>
     <meta name="description" content="Personal research website." />
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="figs/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="figs/favicon-180.png" sizes="180x180" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <header>
-      <div class="container topbar">
-        <div class="brand">
-          <div class="title" data-i18n="site.title">Shu Tamano</div>
-          <div class="subtitle" data-i18n="site.subtitle">Systems • Health Security • Data</div>
-        </div>
-        <nav>
-          <a href="index.html" class="active" data-i18n="nav.home">Home</a>
-          <a href="about.html" data-i18n="nav.about">About</a>
-          <a href="cv.html" data-i18n="nav.cv">Academic CV</a>
-          <a href="research.html" data-i18n="nav.research">Research</a>
-          <button class="lang-toggle" type="button" data-lang-toggle>日本語</button>
-        </nav>
-      </div>
-    </header>
+  <body data-page="home">
+    <div id="site-header"></div>
 
     <main class="container">
       <section class="hero reveal" style="--delay: 0.05s">
@@ -75,27 +62,9 @@
       </section>
     </main>
 
-    <footer>
-      <div class="container">
-        <div class="section-title" data-i18n="footer.label">Quick Links</div>
-        <div data-i18n="footer.note">Add more links later by extending the list below.</div>
-        <div class="link-row">
-          <a class="button" href="https://scholar.google.com/citations?user=vHSV_pAAAAAJ&hl=ja" target="_blank" rel="noopener">
-            Google Scholar
-          </a>
-          <a class="button" href="https://x.com/01stamano" target="_blank" rel="noopener">
-            X
-          </a>
-          <a class="button" href="https://github.com/shutech2001" target="_blank" rel="noopener">
-            GitHub
-          </a>
-          <a class="button" href="https://arxiv.org/search/?searchtype=author&query=Shu%20Tamano" target="_blank" rel="noopener">
-            arXiv Papers
-          </a>
-        </div>
-      </div>
-    </footer>
+    <div id="site-footer"></div>
 
+    <script src="js/layout.js" defer></script>
     <script src="js/site.js" defer></script>
   </body>
 </html>
