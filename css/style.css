@@ -12,8 +12,8 @@
   --shadow: 0 14px 34px rgba(9, 18, 30, 0.08);
   --sans: "Space Grotesk", "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
-  --jp-serif: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho",
-    "MS Mincho", "Noto Serif JP", serif;
+  --jp-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo",
+    "Noto Sans JP", sans-serif;
 }
 
 * {
@@ -33,7 +33,7 @@ body {
 }
 
 :lang(ja) body {
-  font-family: var(--jp-serif);
+  font-family: var(--jp-sans);
 }
 
 body::before {
@@ -233,6 +233,44 @@ main > section:first-child {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1;
+  font-family: var(--mono);
+  letter-spacing: 0.03em;
+  border: 1px solid transparent;
+}
+
+.tag-badge.lead {
+  color: #1d4ed8;
+  background: rgba(29, 78, 216, 0.12);
+  border-color: rgba(29, 78, 216, 0.25);
+}
+
+.tag-badge.corresponding {
+  color: #0f766e;
+  background: rgba(15, 118, 110, 0.12);
+  border-color: rgba(15, 118, 110, 0.25);
+}
+
+.tag-badge.last {
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.12);
+  border-color: rgba(124, 58, 237, 0.25);
+}
+
+.tag-badge.peer {
+  color: #b45309;
+  background: rgba(180, 83, 9, 0.12);
+  border-color: rgba(180, 83, 9, 0.25);
 }
 
 .profile-grid {
