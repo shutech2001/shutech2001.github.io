@@ -12,8 +12,8 @@
   --shadow: 0 14px 34px rgba(9, 18, 30, 0.08);
   --sans: "Space Grotesk", "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
-  --jp-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo",
-    "Noto Sans JP", sans-serif;
+  --jp-round: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "HGMaruGothicMPRO",
+    "Yu Gothic", "Meiryo", "Noto Sans JP", sans-serif;
 }
 
 * {
@@ -33,7 +33,12 @@ body {
 }
 
 :lang(ja) body {
-  font-family: var(--jp-sans);
+  font-family: var(--jp-round);
+  font-weight: 500;
+}
+
+:lang(ja) body * {
+  font-family: var(--jp-round);
 }
 
 body::before {
@@ -304,6 +309,38 @@ main > section:first-child {
   border-color: rgba(147, 51, 234, 0.25);
 }
 
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 6px;
+}
+
+.filter-button {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 5px 12px;
+  min-height: 24px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.filter-button.active {
+  color: var(--accent);
+  border-color: rgba(37, 99, 235, 0.4);
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.filter-button:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.45);
+  outline-offset: 2px;
+}
+
 .profile-grid {
   display: grid;
   gap: 20px;
@@ -348,6 +385,10 @@ main > section:first-child {
   border-radius: 14px;
   padding: 22px;
   background: #ffffff;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 .citation-box {
@@ -423,6 +464,26 @@ main > section:first-child {
   vertical-align: top;
 }
 
+.cv-table.jobs col.col-period {
+  width: 170px;
+}
+
+.cv-table.jobs col.col-notes {
+  width: 20em;
+}
+
+.cv-table.jobs td:nth-child(3),
+.cv-table.jobs th:nth-child(3) {
+  text-align: left;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.notes-stack {
+  display: grid;
+  gap: 4px;
+}
+
 .cv-table th + th,
 .cv-table td + td {
   border-left: 1px solid var(--line);
@@ -440,6 +501,10 @@ main > section:first-child {
 
 .cv-table .muted-row .cv-role {
   color: var(--muted);
+}
+
+.cv-table .ended-row td {
+  background: rgba(15, 23, 42, 0.015);
 }
 
 .cv-table td:first-child,
@@ -485,6 +550,11 @@ main > section:first-child {
   align-items: start;
 }
 
+.cv-meta.compact li {
+  grid-template-columns: 72px 1fr;
+  gap: 6px;
+}
+
 .cv-label {
   font-family: var(--mono);
   font-size: 0.7rem;
@@ -500,9 +570,35 @@ main > section:first-child {
   text-underline-offset: 2px;
 }
 
+.name-strong {
+  font-weight: 600;
+}
+
+.name-strong.jp {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
 .conference-list {
   display: grid;
   gap: 18px;
+}
+
+.lang-en {
+  display: inline;
+}
+
+.lang-ja {
+  display: none;
+}
+
+html[lang="ja"] .lang-en {
+  display: none;
+}
+
+html[lang="ja"] .lang-ja {
+  display: inline;
 }
 
 .cv-table tr:last-child td {

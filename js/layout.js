@@ -4,7 +4,6 @@
       <div class="container topbar">
         <div class="brand">
           <div class="title" data-i18n="site.title">Personal Research Page</div>
-          <div class="subtitle" data-i18n="site.subtitle">Systems • Health Security • Data</div>
         </div>
         <nav>
           <a href="index.html" data-nav="home" data-i18n="nav.home">Home</a>
@@ -21,7 +20,6 @@
     <footer>
       <div class="container">
         <div class="section-title" data-i18n="footer.label">Quick Links</div>
-        <div data-i18n="footer.note">Add more links later by extending the list below.</div>
         <div class="link-row">
           <a
             class="button"
