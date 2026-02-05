@@ -15,13 +15,28 @@
     <main class="container">
       <section class="hero reveal" style="--delay: 0.05s">
         <h1 data-i18n="research.title">Selected Papers</h1>
-        <p class="meta" data-i18n="research.note">
-          Placeholder entries. Replace with your publications and links.
-        </p>
       </section>
 
-      <section class="grid">
-        <article class="paper reveal" style="--delay: 0.15s">
+      <div class="filter-bar" data-filter-scope="#papers-list">
+        <button class="filter-button active" type="button" data-filter="all" data-i18n="filter.all">
+          All
+        </button>
+        <button class="filter-button" type="button" data-filter="lead" data-i18n="filter.lead">
+          Lead Author
+        </button>
+        <button class="filter-button" type="button" data-filter="corresponding" data-i18n="filter.corresponding">
+          Corresponding Author
+        </button>
+        <button class="filter-button" type="button" data-filter="last" data-i18n="filter.last">
+          Last Author
+        </button>
+        <button class="filter-button" type="button" data-filter="peer" data-i18n="filter.peer">
+          Peer-reviewed
+        </button>
+      </div>
+
+      <section class="grid" id="papers-list">
+        <article class="paper reveal" style="--delay: 0.15s" data-tags="lead corresponding">
           <h3>Location–Scale Calibration for Generalized Posterior (2025)</h3>
           <div class="tag-row">
             <span class="tag-badge lead" data-i18n="tag.lead">Lead Author</span>
@@ -54,7 +69,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="lead">
           <h3>Efficient Gibbs Sampling in Cox Regression Models Using Composite Partial Likelihood and Pólya-Gamma Augmentation (2025)</h3>
           <div class="tag-row">
             <span class="tag-badge lead" data-i18n="tag.lead">Lead Author</span>
@@ -86,7 +101,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="lead last corresponding">
           <h3>DOLCE: Decomposing Off-Policy Evaluation/Learning into Lagged and Current Effects (2025)</h3>
           <div class="tag-row">
             <span class="tag-badge lead" data-i18n="tag.lead">Lead Author</span>
@@ -120,7 +135,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="peer">
           <h3>Outcome of osimertinib-treated patients with epidermal growth factor receptor mutation-positive nonsmall cell lung cancer requiring dose reduction: a secondary analysis of the Reiwa study (2025)</h3>
           <div class="tag-row">
             <span class="tag-badge peer" data-i18n="tag.peer">Peer-reviewed</span>
@@ -149,7 +164,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="peer">
           <h3>Clinical outcomes of patients with EGFR-mutated NSCLC developing interstitial lung disease during first-line osimertinib therapy: a sub-analysis of the Reiwa study (2025)</h3>
           <div class="tag-row">
             <span class="tag-badge peer" data-i18n="tag.peer">Peer-reviewed</span>
@@ -178,7 +193,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="peer">
           <h3>Observational study of the efficacy and safety of first-line osimertinib and later treatments for uncommon epidermal growth factor receptor-activating mutation-positive advanced non-small cell lung cancer (2025)</h3>
           <div class="tag-row">
             <span class="tag-badge peer" data-i18n="tag.peer">Peer-reviewed</span>
@@ -207,7 +222,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="peer">
           <h3>Real-World Study of EGFR-TKI Rechallenge With Another TKI After First-Line Osimertinib Discontinuation in Patients With EGFR-Mutated Non-Small Cell Lung Cancer: A Subset Analysis of the Reiwa Study (2025)</h3>
           <div class="tag-row">
             <span class="tag-badge peer" data-i18n="tag.peer">Peer-reviewed</span>
@@ -236,7 +251,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="peer">
           <h3>Involvement of Mediterranean fever gene mutations in colchicine-responsive enterocolitis: a retrospective cohort study (2024)</h3>
           <div class="tag-row">
             <span class="tag-badge peer" data-i18n="tag.peer">Peer-reviewed</span>
@@ -265,7 +280,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="peer">
           <h3>Difference in efficacy of osimertinib between patients with EGFR-positive NSCLC with postoperative recurrence and those with de novo unresectable disease: A prospective, observational study (2024)</h3>
           <div class="tag-row">
             <span class="tag-badge peer" data-i18n="tag.peer">Peer-reviewed</span>
@@ -294,7 +309,7 @@
           </div>
         </article>
 
-        <article class="paper reveal" style="--delay: 0.25s">
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="peer">
           <h3>The whole picture of first-line osimertinib for EGFR mutation-positive advanced NSCLC: real-world efficacy, safety, progression pattern, and posttreatment therapy (Reiwa Study) (2024)</h3>
           <div class="tag-row">
             <span class="tag-badge peer" data-i18n="tag.peer">Peer-reviewed</span>
@@ -328,117 +343,140 @@
 
       <section class="card reveal" style="--delay: 0.35s">
         <h2 class="section-title" data-i18n="research.conferenceTitle">Conferences</h2>
-        <div class="conference-list">
-          <article class="paper">
-            <h3>Incorporating bidirectional flow into effective distance metrics on complex networks</h3>
+        <div class="filter-bar" data-filter-scope="#conference-list">
+          <button class="filter-button active" type="button" data-filter="all" data-i18n="filter.all">
+            All
+          </button>
+          <button class="filter-button" type="button" data-filter="leadPresenter" data-i18n="filter.leadPresenter">
+            Lead Presenter
+          </button>
+          <button class="filter-button" type="button" data-filter="coPresenter" data-i18n="filter.coPresenter">
+            Co-presenter
+          </button>
+          <button class="filter-button" type="button" data-filter="oral" data-i18n="filter.oral">
+            Oral
+          </button>
+          <button class="filter-button" type="button" data-filter="poster" data-i18n="filter.poster">
+            Poster
+          </button>
+        </div>
+        <div class="conference-list" id="conference-list">
+          <article class="paper" data-tags="leadPresenter poster">
+            <h3>
+              Incorporating bidirectional flow into effective distance metrics on complex networks
+            </h3>
             <div class="tag-row">
               <span class="tag-badge presenter-lead" data-i18n="tag.leadPresenter">Lead Presenter</span>
               <span class="tag-badge poster" data-i18n="tag.poster">Poster</span>
             </div>
             <ul class="cv-meta">
-              <li><span class="cv-label" data-i18n="conf.society">Society</span><span>EPIDEMICS 10: 10th International Conference on Infectious Disease Dynamics</span></li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>San Diego</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>USA</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.society">Society</span>
+                <span>
+                  EPIDEMICS 10: 10th International Conference on Infectious Disease Dynamics
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span>San Diego</span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span>USA</span>
+              </li>
               <li>
                 <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
-                <span><span class="author-name">Shu Tamano</span>, Yui Tomo, Daisuke Yoneoka</span>
+                <span>
+                  <span class="author-name">Shu Tamano</span>, Yui Tomo, Daisuke Yoneoka
+                </span>
               </li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2025-12</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2025-12</span><span class="lang-ja">2025年12月</span></span>
+              </li>
             </ul>
           </article>
 
-          <article class="paper">
-            <h3>Self-supervised graph neural networks for predicting first arrival times on complex epidemic networks</h3>
+          <article class="paper" data-tags="leadPresenter poster">
+            <h3>
+              Self-supervised graph neural networks for predicting first arrival times on complex epidemic networks
+            </h3>
             <div class="tag-row">
               <span class="tag-badge presenter-lead" data-i18n="tag.leadPresenter">Lead Presenter</span>
               <span class="tag-badge poster" data-i18n="tag.poster">Poster</span>
             </div>
             <ul class="cv-meta">
-              <li><span class="cv-label" data-i18n="conf.society">Society</span><span>EPIDEMICS 10: 10th International Conference on Infectious Disease Dynamics</span></li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>San Diego</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>USA</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.society">Society</span>
+                <span>
+                  EPIDEMICS 10: 10th International Conference on Infectious Disease Dynamics
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span>San Diego</span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span>USA</span>
+              </li>
               <li>
                 <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
-                <span><span class="author-name">Shu Tamano</span>, Yui Tomo, Daisuke Yoneoka</span>
+                <span>
+                  <span class="author-name">Shu Tamano</span>, Yui Tomo, Daisuke Yoneoka
+                </span>
               </li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2025-12</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2025-12</span><span class="lang-ja">2025年12月</span></span>
+              </li>
             </ul>
           </article>
 
-          <article class="paper">
-            <h3>Causal Effect Estimation via Data Integration with Missing Values Using Masked Metric Space</h3>
+          <article class="paper" data-tags="leadPresenter poster">
+            <h3>
+              <span class="lang-en">Causal Effect Estimation via Data Integration with Missing Values Using Masked Metric Space</span>
+              <span class="lang-ja">マスク付き距離空間を用いた欠損値を含むデータの統合に基づく因果効果推定</span>
+            </h3>
             <div class="tag-row">
               <span class="tag-badge presenter-lead" data-i18n="tag.leadPresenter">Lead Presenter</span>
               <span class="tag-badge poster" data-i18n="tag.poster">Poster</span>
             </div>
             <ul class="cv-meta">
-              <li><span class="cv-label" data-i18n="conf.society">Society</span><span>The 28th Information-Based Induction Sciences Workshop</span></li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>Okinawa</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>Japan</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.society">Society</span>
+                <span>
+                  <span class="lang-en">The 28th Information-Based Induction Sciences Workshop</span>
+                  <span class="lang-ja">第28回情報論的学習理論ワークショップ</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span><span class="lang-en">Okinawa</span><span class="lang-ja">沖縄</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span><span class="lang-en">Japan</span><span class="lang-ja">日本</span></span>
+              </li>
               <li>
                 <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
-                <span><span class="author-name">Shu Tamano</span>, Yuya Ishikawa, Yui Tomo</span>
+                <span>
+                  <span class="lang-en"><span class="author-name">Shu Tamano</span>, Yuya Ishikawa, Yui Tomo</span>
+                  <span class="lang-ja"><span class="author-name">玉野 史結</span>、石川 裕也、塘 由惟</span>
+                </span>
               </li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2025-11</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2025-11</span><span class="lang-ja">2025年11月</span></span>
+              </li>
             </ul>
           </article>
 
-          <article class="paper">
-            <h3>Efficient Gibbs Sampling in Cox Regression Models Using Composite Partial Likelihood and Pólya-Gamma Augmentation</h3>
-            <div class="tag-row">
-              <span class="tag-badge presenter-lead" data-i18n="tag.leadPresenter">Lead Presenter</span>
-              <span class="tag-badge oral" data-i18n="tag.oral">Oral</span>
-            </div>
-            <ul class="cv-meta">
-              <li><span class="cv-label" data-i18n="conf.society">Society</span><span>Japanese Joint Statistical Meeting</span></li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>Osaka</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>Japan</span></li>
-              <li>
-                <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
-                <span><span class="author-name">Shu Tamano</span>, Yui Tomo</span>
-              </li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2025-09</span></li>
-            </ul>
-          </article>
-
-          <article class="paper">
-            <h3>Arrival Time Statistics Under Fractal SIR Model</h3>
-            <div class="tag-row">
-              <span class="tag-badge presenter-co" data-i18n="tag.coPresenter">Co-presenter</span>
-              <span class="tag-badge oral" data-i18n="tag.oral">Oral</span>
-            </div>
-            <ul class="cv-meta">
-              <li><span class="cv-label" data-i18n="conf.society">Society</span><span>Japanese Joint Statistical Meeting</span></li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>Osaka</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>Japan</span></li>
-              <li>
-                <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
-                <span>Yui Tomo, <span class="author-name">Shu Tamano</span>, Daisuke Yoneoka</span>
-              </li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2025-09</span></li>
-            </ul>
-          </article>
-
-          <article class="paper">
-            <h3>Causal Inference under Network Interaction and Network Uncertainty</h3>
-            <div class="tag-row">
-              <span class="tag-badge presenter-lead" data-i18n="tag.leadPresenter">Lead Presenter</span>
-              <span class="tag-badge oral" data-i18n="tag.oral">Oral</span>
-            </div>
-            <ul class="cv-meta">
-              <li><span class="cv-label" data-i18n="conf.society">Society</span><span>Annual Meeting of the Biometric Society of Japan</span></li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>Toyama</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>Japan</span></li>
-              <li>
-                <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
-                <span><span class="author-name">Shu Tamano</span>, Yui Tomo, Daisuke Yoneoka</span>
-              </li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2025-05</span></li>
-            </ul>
-          </article>
-
-          <article class="paper">
-            <h3>Proposal of Evaluation Off-target Effects Method in Gapmer ASO</h3>
+          <article class="paper" data-tags="leadPresenter oral">
+            <h3>
+              <span class="lang-en">Efficient Gibbs Sampling in Cox Regression Models Using Composite Partial Likelihood and Pólya-Gamma Augmentation</span>
+              <span class="lang-ja">一般化ベイズ法に基づくCox回帰モデルのPólya-Gamma補助変数を用いたGibbsサンプリング</span>
+            </h3>
             <div class="tag-row">
               <span class="tag-badge presenter-lead" data-i18n="tag.leadPresenter">Lead Presenter</span>
               <span class="tag-badge oral" data-i18n="tag.oral">Oral</span>
@@ -446,15 +484,154 @@
             <ul class="cv-meta">
               <li>
                 <span class="cv-label" data-i18n="conf.society">Society</span>
-                <span>69th Information Processing Society of Japan, Special Interest Group on Bioinformatics (SIGBIO)</span>
+                <span>
+                  <span class="lang-en">Japanese Joint Statistical Meeting</span>
+                  <span class="lang-ja">統計関連学会連合大会</span>
+                </span>
               </li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>Online</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>Japan</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span><span class="lang-en">Osaka</span><span class="lang-ja">大阪</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span><span class="lang-en">Japan</span><span class="lang-ja">日本</span></span>
+              </li>
               <li>
                 <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
-                <span><span class="author-name">Shu Tamano</span>, Kazuki Izawa, Keisuke Yanagisawa, Masahito Ohue, Yutaka Akiyama</span>
+                <span>
+                  <span class="lang-en"><span class="author-name">Shu Tamano</span>, Yui Tomo</span>
+                  <span class="lang-ja"><span class="author-name">玉野 史結</span>、塘 由惟</span>
+                </span>
               </li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2022-03</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2025-09</span><span class="lang-ja">2025年9月</span></span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="paper" data-tags="coPresenter oral">
+            <h3>
+              <span class="lang-en">Arrival Time Statistics Under Fractal SIR Model</span>
+              <span class="lang-ja">フラクタルSIRモデル下における感染者到達時間の統計量</span>
+            </h3>
+            <div class="tag-row">
+              <span class="tag-badge presenter-co" data-i18n="tag.coPresenter">Co-presenter</span>
+              <span class="tag-badge oral" data-i18n="tag.oral">Oral</span>
+            </div>
+            <ul class="cv-meta">
+              <li>
+                <span class="cv-label" data-i18n="conf.society">Society</span>
+                <span>
+                  <span class="lang-en">Japanese Joint Statistical Meeting</span>
+                  <span class="lang-ja">統計関連学会連合大会</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span><span class="lang-en">Osaka</span><span class="lang-ja">大阪</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span><span class="lang-en">Japan</span><span class="lang-ja">日本</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
+                <span>
+                  <span class="lang-en">Yui Tomo, <span class="author-name">Shu Tamano</span>, Daisuke Yoneoka</span>
+                  <span class="lang-ja">塘 由惟、<span class="author-name">玉野 史結</span>、米岡 大輔</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2025-09</span><span class="lang-ja">2025年9月</span></span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="paper" data-tags="leadPresenter oral">
+            <h3>
+              <span class="lang-en">Causal Inference under Network Interaction and Network Uncertainty</span>
+              <span class="lang-ja">ネットワーク構造が不明なnon-IIDデータにおける因果効果推定</span>
+            </h3>
+            <div class="tag-row">
+              <span class="tag-badge presenter-lead" data-i18n="tag.leadPresenter">Lead Presenter</span>
+              <span class="tag-badge oral" data-i18n="tag.oral">Oral</span>
+            </div>
+            <ul class="cv-meta">
+              <li>
+                <span class="cv-label" data-i18n="conf.society">Society</span>
+                <span>
+                  <span class="lang-en">Annual Meeting of the Biometric Society of Japan</span>
+                  <span class="lang-ja">日本生物統計学会年会</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span><span class="lang-en">Toyama</span><span class="lang-ja">富山</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span><span class="lang-en">Japan</span><span class="lang-ja">日本</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
+                <span>
+                  <span class="lang-en"><span class="author-name">Shu Tamano</span>, Yui Tomo, Daisuke Yoneoka</span>
+                  <span class="lang-ja"><span class="author-name">玉野 史結</span>、塘 由惟、米岡 大輔</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2025-05</span><span class="lang-ja">2025年5月</span></span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="paper" data-tags="leadPresenter oral">
+            <h3>
+              <span class="lang-en">Proposal of Evaluation Off-target Effects Method in Gapmer ASO</span>
+              <span class="lang-ja">Gapmer型ASOにおけるオフターゲット効果のリスク評価手法の提案</span>
+            </h3>
+            <div class="tag-row">
+              <span class="tag-badge presenter-lead" data-i18n="tag.leadPresenter">Lead Presenter</span>
+              <span class="tag-badge oral" data-i18n="tag.oral">Oral</span>
+            </div>
+            <ul class="cv-meta">
+              <li>
+                <span class="cv-label" data-i18n="conf.society">Society</span>
+                <span>
+                  <span class="lang-en">
+                    69th Information Processing Society of Japan, Special Interest Group on Bioinformatics (SIGBIO)
+                  </span>
+                  <span class="lang-ja">情報処理学会 第69回 バイオ情報学研究会（SIGBIO）</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span><span class="lang-en">Online</span><span class="lang-ja">オンライン</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span><span class="lang-en">Japan</span><span class="lang-ja">日本</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.presenters">Co-presenters</span>
+                <span>
+                  <span class="lang-en">
+                    <span class="author-name">Shu Tamano</span>, Kazuki Izawa, Keisuke Yanagisawa, Masahito Ohue,
+                    Yutaka Akiyama
+                  </span>
+                  <span class="lang-ja">
+                    <span class="author-name">玉野 史結</span>、伊澤 和輝、柳澤 渓甫、大上 雅史、秋山 泰
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2022-03</span><span class="lang-ja">2022年3月</span></span>
+              </li>
             </ul>
           </article>
         </div>
@@ -464,26 +641,79 @@
         <h2 class="section-title" data-i18n="research.otherSeminars">Other Seminars</h2>
         <div class="conference-list">
           <article class="paper">
-            <h3>Causal Inference Using Quasi-Experimental Designs: Difference-in-Differences and Synthetic Control Methods</h3>
+            <h3>
+              <span class="lang-en">
+                Causal Inference Using Quasi-Experimental Designs: Difference-in-Differences and Synthetic Control
+                Methods
+              </span>
+              <span class="lang-ja">準実験デザインによる因果推論：差の差法と合成統制法</span>
+            </h3>
             <ul class="cv-meta">
-              <li><span class="cv-label" data-i18n="conf.seminar">Seminar</span><span>Infectious Disease Statistics and Mathematical Modeling Summer Seminar</span></li>
-              <li><span class="cv-label" data-i18n="conf.organization">Organization</span><span>Department of Epidemiology, National Institute of Infectious Diseases</span></li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>Tokyo (Toyama campus of National Institute of Infectious Diseases)</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>Japan</span></li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2025-10</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.seminar">Seminar</span>
+                <span>
+                  <span class="lang-en">Infectious Disease Statistics and Mathematical Modeling Summer Seminar</span>
+                  <span class="lang-ja">感染症統計数学サマーセミナー</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.organization">Organization</span>
+                <span>
+                  <span class="lang-en">Department of Epidemiology, National Institute of Infectious Diseases</span>
+                  <span class="lang-ja">国立感染症研究所 疫学研究部</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span>
+                  <span class="lang-en">
+                    Tokyo (Toyama campus of National Institute of Infectious Diseases)
+                  </span>
+                  <span class="lang-ja">東京（国立感染症研究所 戸山キャンパス）</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span><span class="lang-en">Japan</span><span class="lang-ja">日本</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2025-10</span><span class="lang-ja">2025年10月</span></span>
+              </li>
             </ul>
           </article>
           <article class="paper">
-            <h3>Efficient Gibbs Sampling in Cox Regression Models Using Composite Partial Likelihood and Pólya-Gamma Augmentation</h3>
+            <h3>
+                Efficient Gibbs Sampling in Cox Regression Models Using Composite Partial Likelihood and
+                Pólya-Gamma Augmentation
+            </h3>
             <div class="tag-row">
               <span class="tag-badge invited" data-i18n="tag.invited">Invited Talk</span>
             </div>
             <ul class="cv-meta">
-              <li><span class="cv-label" data-i18n="conf.seminar">Seminar</span><span>Bayes Study Group</span></li>
-              <li><span class="cv-label" data-i18n="conf.organization">Organization</span><span>Bayes Study Group</span></li>
-              <li><span class="cv-label" data-i18n="conf.city">City</span><span>Tokyo (Hongo campus of The University of Tokyo)</span></li>
-              <li><span class="cv-label" data-i18n="conf.country">Country</span><span>Japan</span></li>
-              <li><span class="cv-label" data-i18n="conf.date">Date</span><span>2025-07</span></li>
+              <li>
+                <span class="cv-label" data-i18n="conf.seminar">Seminar</span>
+                <span><span class="lang-en">Bayes Study Group</span><span class="lang-ja">ベイズ会</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.organization">Organization</span>
+                <span><span class="lang-en">Bayes Study Group</span><span class="lang-ja">ベイズ会</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.city">City</span>
+                <span>
+                  <span class="lang-en">Tokyo (Hongo campus of The University of Tokyo)</span>
+                  <span class="lang-ja">東京（東京大学 本郷キャンパス）</span>
+                </span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.country">Country</span>
+                <span><span class="lang-en">Japan</span><span class="lang-ja">日本</span></span>
+              </li>
+              <li>
+                <span class="cv-label" data-i18n="conf.date">Date</span>
+                <span><span class="lang-en">2025-07</span><span class="lang-ja">2025年7月</span></span>
+              </li>
             </ul>
           </article>
         </div>
@@ -494,5 +724,6 @@
 
     <script src="js/layout.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/filters.js" defer></script>
   </body>
 </html>
