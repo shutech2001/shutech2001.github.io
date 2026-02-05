@@ -472,6 +472,10 @@ main > section:first-child {
   width: 20em;
 }
 
+.cv-table.jobs {
+  table-layout: fixed;
+}
+
 .cv-table.jobs td:nth-child(3),
 .cv-table.jobs th:nth-child(3) {
   text-align: left;
@@ -654,14 +658,28 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .cv-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
   .cv-table th,
   .cv-table td {
     padding: 10px 12px;
+  }
+
+  .cv-table.jobs {
+    min-width: 720px;
+  }
+}
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll .cv-table {
+  min-width: 720px;
+}
+
+@media (max-width: 720px) {
+  .table-scroll {
+    margin-right: -4px;
+    padding-bottom: 4px;
   }
 }
