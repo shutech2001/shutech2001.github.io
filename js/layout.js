@@ -1,71 +1,132 @@
 (() => {
   const header = `
-    <header class="floating-menu" data-menu-root>
-      <button
-        class="menu-fab"
-        type="button"
-        data-menu-toggle
-        aria-expanded="false"
-        aria-controls="site-menu-panel"
-        aria-label="Open menu"
-        title="Open menu"
-      >
-        <span class="menu-line"></span>
-        <span class="menu-line"></span>
-        <span class="menu-line"></span>
-      </button>
-      <div class="menu-panel" id="site-menu-panel" data-menu-panel>
-        <div class="brand">
-          <div class="title" data-i18n="site.title">Personal Research Page</div>
+    <header class="hybrid-header" data-header-shell>
+      <div class="legacy-header">
+        <div class="container topbar">
+          <div class="brand">
+            <div class="title" data-i18n="site.title">Personal Research Page</div>
+          </div>
+          <div class="legacy-right">
+            <nav class="legacy-nav">
+              <a href="index.html" data-nav="home" data-i18n="nav.home">Home</a>
+              <a href="about.html" data-nav="about" data-i18n="nav.about">About</a>
+              <a href="cv.html" data-nav="cv" data-i18n="nav.cv">Academic CV</a>
+              <a href="research.html" data-nav="research" data-i18n="nav.research">Research</a>
+            </nav>
+            <div class="legacy-actions">
+              <button
+                class="theme-toggle"
+                type="button"
+                data-theme-toggle
+                aria-label="Switch to dark mode"
+                title="Switch to dark mode"
+              >
+                <svg
+                  class="theme-icon moon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>
+                </svg>
+                <svg
+                  class="theme-icon sun"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="M4.93 4.93l1.41 1.41"></path>
+                  <path d="M17.66 17.66l1.41 1.41"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                  <path d="M4.93 19.07l1.41-1.41"></path>
+                  <path d="M17.66 6.34l1.41-1.41"></path>
+                </svg>
+              </button>
+              <button class="lang-toggle" type="button" data-lang-toggle>日本語</button>
+            </div>
+          </div>
         </div>
-        <nav>
-          <a href="index.html" data-nav="home" data-i18n="nav.home">Home</a>
-          <a href="about.html" data-nav="about" data-i18n="nav.about">About</a>
-          <a href="cv.html" data-nav="cv" data-i18n="nav.cv">Academic CV</a>
-          <a href="research.html" data-nav="research" data-i18n="nav.research">Research</a>
-        </nav>
-        <div class="menu-actions">
-          <button
-            class="theme-toggle"
-            type="button"
-            data-theme-toggle
-            aria-label="Switch to dark mode"
-            title="Switch to dark mode"
-          >
-            <svg
-              class="theme-icon moon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
+      </div>
+
+      <div class="floating-menu" data-menu-root>
+        <button
+          class="menu-fab"
+          type="button"
+          data-menu-toggle
+          aria-expanded="false"
+          aria-controls="site-menu-panel"
+          aria-label="Open menu"
+          title="Open menu"
+        >
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+        </button>
+        <div class="menu-panel" id="site-menu-panel" data-menu-panel>
+          <div class="brand">
+            <div class="title" data-i18n="site.title">Personal Research Page</div>
+          </div>
+          <nav>
+            <a href="index.html" data-nav="home" data-i18n="nav.home">Home</a>
+            <a href="about.html" data-nav="about" data-i18n="nav.about">About</a>
+            <a href="cv.html" data-nav="cv" data-i18n="nav.cv">Academic CV</a>
+            <a href="research.html" data-nav="research" data-i18n="nav.research">Research</a>
+          </nav>
+          <div class="menu-actions">
+            <button
+              class="theme-toggle"
+              type="button"
+              data-theme-toggle
+              aria-label="Switch to dark mode"
+              title="Switch to dark mode"
             >
-              <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>
-            </svg>
-            <svg
-              class="theme-icon sun"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2"></path>
-              <path d="M12 20v2"></path>
-              <path d="M4.93 4.93l1.41 1.41"></path>
-              <path d="M17.66 17.66l1.41 1.41"></path>
-              <path d="M2 12h2"></path>
-              <path d="M20 12h2"></path>
-              <path d="M4.93 19.07l1.41-1.41"></path>
-              <path d="M17.66 6.34l1.41-1.41"></path>
-            </svg>
-          </button>
-          <button class="lang-toggle" type="button" data-lang-toggle>日本語</button>
+              <svg
+                class="theme-icon moon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path>
+              </svg>
+              <svg
+                class="theme-icon sun"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="M4.93 4.93l1.41 1.41"></path>
+                <path d="M17.66 17.66l1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="M4.93 19.07l1.41-1.41"></path>
+                <path d="M17.66 6.34l1.41-1.41"></path>
+              </svg>
+            </button>
+            <button class="lang-toggle" type="button" data-lang-toggle>日本語</button>
+          </div>
         </div>
       </div>
     </header>
@@ -76,6 +137,19 @@
       <div class="container">
         <div class="section-title" data-i18n="footer.label">Quick Links</div>
         <div class="link-row">
+          <a
+            class="icon-link"
+            data-brand="mail"
+            href="mailto:tamano-shu212@g.ecc.u-tokyo.ac.jp"
+            aria-label="Email"
+            title="Email"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="3" y="6.5" width="18" height="11" rx="2"></rect>
+              <path d="M4 8l8 6 8-6"></path>
+            </svg>
+            <span class="sr-only">Email</span>
+          </a>
           <a
             class="icon-link"
             data-brand="scholar"
@@ -155,6 +229,7 @@
     });
   }
 
+  const headerShell = document.querySelector("[data-header-shell]");
   const menuRoot = document.querySelector("[data-menu-root]");
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const setMenuOpen = (isOpen) => {
@@ -168,6 +243,20 @@
   };
 
   setMenuOpen(false);
+
+  const syncHeaderMode = () => {
+    if (!headerShell) {
+      return;
+    }
+    const compact = window.scrollY > 72;
+    headerShell.classList.toggle("is-compact", compact);
+    if (!compact) {
+      setMenuOpen(false);
+    }
+  };
+
+  syncHeaderMode();
+  window.addEventListener("scroll", syncHeaderMode, { passive: true });
 
   if (menuRoot && menuToggle) {
     menuToggle.addEventListener("click", () => {
