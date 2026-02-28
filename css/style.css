@@ -1002,6 +1002,28 @@ main > section:first-child {
   color: var(--muted);
 }
 
+.inline-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.inline-brand-link::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  background-color: currentColor;
+  -webkit-mask-image: var(--brand-icon-url);
+  mask-image: var(--brand-icon-url);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -1246,6 +1268,29 @@ footer {
 .icon-link svg {
   width: 18px;
   height: 18px;
+}
+
+.brand-mark {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: var(--brand-icon-url);
+  mask-image: var(--brand-icon-url);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.brand-arxiv {
+  --brand-icon-url: url("https://cdn.simpleicons.org/arxiv");
+}
+
+.brand-doi {
+  --brand-icon-url: url("https://cdn.simpleicons.org/doi");
 }
 
 .icon-link[data-brand="x"] svg {
