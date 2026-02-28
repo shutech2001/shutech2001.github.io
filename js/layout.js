@@ -198,12 +198,16 @@
             <span class="sr-only">GitHub</span>
           </a>
           <a
-            class="button"
+            class="icon-link"
+            data-brand="arxiv"
             href="https://arxiv.org/search/?searchtype=author&query=Shu%20Tamano"
             target="_blank"
             rel="noopener"
+            aria-label="arXiv Papers"
+            title="arXiv Papers"
           >
-            arXiv Papers
+            <span class="brand-mark brand-arxiv" aria-hidden="true"></span>
+            <span class="sr-only">arXiv Papers</span>
           </a>
         </div>
       </div>

@@ -238,6 +238,15 @@
       link.classList.add("button-with-icon", "github-button");
       link.innerHTML = `${githubIcon}<span class="button-label">${label}</span>`;
     });
+
+    const decorateInlineResearchLinks = (selector, brandClass) => {
+      document.querySelectorAll(selector).forEach((link) => {
+        link.classList.add("inline-brand-link", brandClass);
+      });
+    };
+
+    decorateInlineResearchLinks('.paper .links a[href*="arxiv.org"]', "brand-arxiv");
+    decorateInlineResearchLinks('.paper .links a[href*="doi.org"]', "brand-doi");
   };
 
   const getInitialTheme = () => {
