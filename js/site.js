@@ -6,6 +6,8 @@
       "nav.about": "About",
       "nav.cv": "Academic C.V.",
       "nav.research": "Research",
+      "menu.open": "Open menu",
+      "menu.close": "Close menu",
       "nav.links": "Links",
       "home.tag": "Ph.D. candidate · Researcher",
       "home.profileTitle": "Profile",
@@ -96,6 +98,8 @@
       "nav.about": "概要",
       "nav.cv": "C.V.",
       "nav.research": "研究",
+      "menu.open": "メニューを開く",
+      "menu.close": "メニューを閉じる",
       "nav.links": "リンク",
       "home.tag": "博士後期課程・研究員",
       "home.profileTitle": "プロフィール",
@@ -184,6 +188,8 @@
 
   const supported = ["en", "ja"];
   const defaultLang = "en";
+  const supportedThemes = ["light", "dark"];
+  const defaultTheme = "light";
 
   const getInitialLang = () => {
     const urlLang = new URLSearchParams(window.location.search).get("lang");
@@ -215,6 +221,83 @@
     });
   };
 
+  const decorateResearchActionLinks = () => {
+    const bibtexIcon =
+      '<svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h8l4 4v12H6z"></path><path d="M14 4v4h4"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg>';
+    const githubIcon =
+      '<svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.3 6.4-1.5 6.4-7A5.5 5.5 0 0 0 20 4.8 5 5 0 0 0 19.9 1S18.7.7 16 2.5a13.4 13.4 0 0 0-7 0C6.3.7 5.1 1 5.1 1A5 5 0 0 0 5 4.8 5.5 5.5 0 0 0 3.5 8.5c0 5.4 3.3 6.6 6.4 7A3.4 3.4 0 0 0 9 18.1V22"></path></svg>';
+
+    document.querySelectorAll('a[data-i18n="research.bibtex"]').forEach((link) => {
+      const label = link.textContent.trim();
+      link.classList.add("button-with-icon", "bibtex-button");
+      link.innerHTML = `${bibtexIcon}<span class="button-label">${label}</span>`;
+    });
+
+    document.querySelectorAll('a[data-i18n="research.github"]').forEach((link) => {
+      const label = link.textContent.trim();
+      link.classList.add("button-with-icon", "github-button");
+      link.innerHTML = `${githubIcon}<span class="button-label">${label}</span>`;
+    });
+  };
+
+  const getInitialTheme = () => {
+    const stored = window.localStorage.getItem("theme");
+    if (supportedThemes.includes(stored)) {
+      return stored;
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return defaultTheme;
+  };
+
+  const getThemeToggleLabel = (lang, theme) => {
+    if (theme === "dark") {
+      return lang === "ja" ? "ライトモードに切り替え" : "Switch to light mode";
+    }
+    return lang === "ja" ? "ダークモードに切り替え" : "Switch to dark mode";
+  };
+
+  const getMenuToggleLabel = (lang, isOpen) => {
+    return isOpen
+      ? (translations[lang] || translations[defaultLang])["menu.close"]
+      : (translations[lang] || translations[defaultLang])["menu.open"];
+  };
+
+  const updateMenuToggleLabel = () => {
+    const toggle = document.querySelector("[data-menu-toggle]");
+    if (!toggle) {
+      return;
+    }
+    const lang = document.documentElement.lang === "ja" ? "ja" : "en";
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    const label = getMenuToggleLabel(lang, isOpen);
+    toggle.setAttribute("aria-label", label);
+    toggle.setAttribute("title", label);
+  };
+
+  const updateThemeToggleLabel = () => {
+    const toggle = document.querySelector("[data-theme-toggle]");
+    if (!toggle) {
+      return;
+    }
+    const lang = document.documentElement.lang === "ja" ? "ja" : "en";
+    const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    const label = getThemeToggleLabel(lang, theme);
+    toggle.setAttribute("aria-label", label);
+    toggle.setAttribute("title", label);
+  };
+
+  const setTheme = (theme, options = {}) => {
+    const normalized = supportedThemes.includes(theme) ? theme : defaultTheme;
+    const persist = options.persist !== false;
+    document.documentElement.dataset.theme = normalized;
+    if (persist) {
+      window.localStorage.setItem("theme", normalized);
+    }
+    updateThemeToggleLabel();
+  };
+
   const setLang = (lang) => {
     const normalized = supported.includes(lang) ? lang : defaultLang;
     document.documentElement.lang = normalized;
@@ -230,7 +313,13 @@
         normalized === "en" ? "Switch to Japanese" : "Switch to English"
       );
     }
+    updateThemeToggleLabel();
+    updateMenuToggleLabel();
+    decorateResearchActionLinks();
   };
+
+  const initialTheme = getInitialTheme();
+  setTheme(initialTheme, { persist: false });
 
   const initial = getInitialLang();
   setLang(initial);
@@ -240,5 +329,16 @@
       const next = document.documentElement.lang === "en" ? "ja" : "en";
       setLang(next);
     });
+  });
+
+  document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      setTheme(next);
+    });
+  });
+
+  window.addEventListener("site-menu-toggle", () => {
+    updateMenuToggleLabel();
   });
 })();
