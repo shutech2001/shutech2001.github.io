@@ -312,11 +312,9 @@ a:hover {
 }
 
 header {
-  position: fixed;
-  top: 16px;
-  right: clamp(10px, 2vw, 24px);
+  position: sticky;
+  top: 0;
   z-index: 24;
-  width: min(340px, calc(100vw - 20px));
   pointer-events: none;
   background: transparent;
   border: 0;
@@ -324,14 +322,58 @@ header {
   backdrop-filter: none;
 }
 
-header * {
+.hybrid-header {
+  position: relative;
+}
+
+.legacy-header {
   pointer-events: auto;
+  max-height: 220px;
+  overflow: hidden;
+  backdrop-filter: blur(14px) saturate(140%);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-line);
+  box-shadow: var(--header-shadow);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.2s ease, border-color 0.2s ease;
+}
+
+.hybrid-header.is-compact .legacy-header {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-12px);
+  border-color: transparent;
+  pointer-events: none;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 0;
 }
 
 .floating-menu {
+  position: fixed;
+  top: 16px;
+  right: clamp(10px, 2vw, 24px);
+  width: min(340px, calc(100vw - 20px));
   display: grid;
   justify-items: end;
   gap: 10px;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.hybrid-header.is-compact .floating-menu {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .menu-fab {
@@ -371,15 +413,15 @@ header * {
   transform: translateY(5px);
 }
 
-header.is-open .menu-fab .menu-line:nth-child(1) {
+.floating-menu.is-open .menu-fab .menu-line:nth-child(1) {
   transform: translateY(0) rotate(45deg);
 }
 
-header.is-open .menu-fab .menu-line:nth-child(2) {
+.floating-menu.is-open .menu-fab .menu-line:nth-child(2) {
   opacity: 0;
 }
 
-header.is-open .menu-fab .menu-line:nth-child(3) {
+.floating-menu.is-open .menu-fab .menu-line:nth-child(3) {
   transform: translateY(0) rotate(-45deg);
 }
 
@@ -406,14 +448,17 @@ header.is-open .menu-fab .menu-line:nth-child(3) {
   opacity: 0;
   transform: translateY(-8px) scale(0.98);
   transform-origin: top right;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.22s ease, transform 0.22s ease;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
 }
 
-header.is-open .menu-panel {
+.floating-menu.is-open .menu-panel {
   opacity: 1;
   transform: translateY(0) scale(1);
+  visibility: visible;
   pointer-events: auto;
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .container {
@@ -438,6 +483,51 @@ header.is-open .menu-panel {
   font-size: 0.85rem;
   color: var(--muted);
   font-family: var(--mono);
+}
+
+.legacy-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.legacy-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+}
+
+.legacy-nav a {
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--muted);
+  line-height: 1;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.legacy-nav a:hover {
+  background: var(--nav-pill-bg);
+  border-color: var(--nav-pill-border);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.legacy-nav a.active {
+  border-color: var(--nav-active-border);
+  background: var(--nav-active-bg);
+  color: var(--nav-active-ink);
+  box-shadow: var(--ring-soft);
+}
+
+.legacy-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .menu-panel nav {
@@ -550,7 +640,7 @@ header.is-open .menu-panel {
 main {
   position: relative;
   z-index: 1;
-  padding: 58px 0 102px;
+  padding: 24px 0 102px;
 }
 
 .hero {
@@ -1208,6 +1298,31 @@ footer {
 
 @media (max-width: 720px) {
   header {
+    top: 0;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .legacy-right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .legacy-nav {
+    gap: 6px;
+  }
+
+  .legacy-nav a {
+    padding: 7px 9px;
+  }
+
+  .floating-menu {
     top: 12px;
     right: 12px;
     width: calc(100vw - 24px);

@@ -152,7 +152,7 @@
       "research.links": "リンク",
       "research.doi": "DOI",
       "research.arxiv": "arXiv",
-      "research.equalContribution": "<sup>&dagger;</sup> 等貢献（Equal contribution）。",
+      "research.equalContribution": "<sup>&dagger;</sup> Equal contribution.",
       "tag.lead": "筆頭著者",
       "tag.corresponding": "責任著者",
       "tag.last": "最終著者",
@@ -277,15 +277,17 @@
   };
 
   const updateThemeToggleLabel = () => {
-    const toggle = document.querySelector("[data-theme-toggle]");
-    if (!toggle) {
+    const toggles = document.querySelectorAll("[data-theme-toggle]");
+    if (!toggles.length) {
       return;
     }
     const lang = document.documentElement.lang === "ja" ? "ja" : "en";
     const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
     const label = getThemeToggleLabel(lang, theme);
-    toggle.setAttribute("aria-label", label);
-    toggle.setAttribute("title", label);
+    toggles.forEach((toggle) => {
+      toggle.setAttribute("aria-label", label);
+      toggle.setAttribute("title", label);
+    });
   };
 
   const setTheme = (theme, options = {}) => {
@@ -305,14 +307,13 @@
     window.localStorage.setItem("lang", normalized);
     applyTranslations(normalized);
 
-    const toggle = document.querySelector("[data-lang-toggle]");
-    if (toggle) {
+    document.querySelectorAll("[data-lang-toggle]").forEach((toggle) => {
       toggle.textContent = normalized === "en" ? "日本語" : "English";
       toggle.setAttribute(
         "aria-label",
         normalized === "en" ? "Switch to Japanese" : "Switch to English"
       );
-    }
+    });
     updateThemeToggleLabel();
     updateMenuToggleLabel();
     decorateResearchActionLinks();
