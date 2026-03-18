@@ -204,6 +204,24 @@
   const defaultLang = "en";
   const supportedThemes = ["light", "dark"];
   const defaultTheme = "light";
+  const textTargets = Array.from(document.querySelectorAll("[data-i18n]")).map((element) => ({
+    element,
+    key: element.dataset.i18n,
+    labelElement: null
+  }));
+  const textTargetByElement = new Map(textTargets.map((target) => [target.element, target]));
+  const htmlTargets = Array.from(document.querySelectorAll("[data-i18n-html]")).map((element) => ({
+    element,
+    key: element.dataset.i18nHtml
+  }));
+  const langToggles = Array.from(document.querySelectorAll("[data-lang-toggle]"));
+  const themeToggles = Array.from(document.querySelectorAll("[data-theme-toggle]"));
+  const menuToggle = document.querySelector("[data-menu-toggle]");
+  const bibtexActionLinks = Array.from(document.querySelectorAll('a[data-i18n="research.bibtex"]'));
+  const githubActionLinks = Array.from(document.querySelectorAll('a[data-i18n="research.github"]'));
+  const arxivLinks = Array.from(document.querySelectorAll('.paper .links a[href*="arxiv.org"]'));
+  const doiLinks = Array.from(document.querySelectorAll('.paper .links a[href*="doi.org"]'));
+  const conceptPanels = Array.from(document.querySelectorAll(".concept-panel"));
 
   const getInitialLang = () => {
     const urlLang = new URLSearchParams(window.location.search).get("lang");
@@ -217,22 +235,43 @@
     return defaultLang;
   };
 
+  const setTranslatedText = (target, value) => {
+    const node = target.labelElement || target.element;
+    if (node.textContent !== value) {
+      node.textContent = value;
+    }
+  };
+
   const applyTranslations = (lang) => {
     const dict = translations[lang] || translations[defaultLang];
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
-      const key = el.dataset.i18n;
-      const value = dict[key];
-      if (value) {
-        el.textContent = value;
+    textTargets.forEach((target) => {
+      const value = dict[target.key];
+      if (value !== undefined) {
+        setTranslatedText(target, value);
       }
     });
-    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
-      const key = el.dataset.i18nHtml;
-      const value = dict[key];
-      if (value) {
-        el.innerHTML = value;
+    htmlTargets.forEach((target) => {
+      const value = dict[target.key];
+      if (value !== undefined && target.element.innerHTML !== value) {
+        target.element.innerHTML = value;
       }
     });
+  };
+
+  const ensureDecoratedActionLink = (link, buttonClass, iconMarkup) => {
+    const target = textTargetByElement.get(link);
+    if (!target) {
+      return;
+    }
+
+    link.classList.add("button-with-icon", buttonClass);
+    if (target.labelElement) {
+      return;
+    }
+
+    const label = link.textContent.trim();
+    link.innerHTML = `${iconMarkup}<span class="button-label">${label}</span>`;
+    target.labelElement = link.querySelector(".button-label");
   };
 
   const decorateResearchActionLinks = () => {
@@ -241,26 +280,57 @@
     const githubIcon =
       '<svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.3 6.4-1.5 6.4-7A5.5 5.5 0 0 0 20 4.8 5 5 0 0 0 19.9 1S18.7.7 16 2.5a13.4 13.4 0 0 0-7 0C6.3.7 5.1 1 5.1 1A5 5 0 0 0 5 4.8 5.5 5.5 0 0 0 3.5 8.5c0 5.4 3.3 6.6 6.4 7A3.4 3.4 0 0 0 9 18.1V22"></path></svg>';
 
-    document.querySelectorAll('a[data-i18n="research.bibtex"]').forEach((link) => {
-      const label = link.textContent.trim();
-      link.classList.add("button-with-icon", "bibtex-button");
-      link.innerHTML = `${bibtexIcon}<span class="button-label">${label}</span>`;
+    bibtexActionLinks.forEach((link) => {
+      ensureDecoratedActionLink(link, "bibtex-button", bibtexIcon);
     });
 
-    document.querySelectorAll('a[data-i18n="research.github"]').forEach((link) => {
-      const label = link.textContent.trim();
-      link.classList.add("button-with-icon", "github-button");
-      link.innerHTML = `${githubIcon}<span class="button-label">${label}</span>`;
+    githubActionLinks.forEach((link) => {
+      ensureDecoratedActionLink(link, "github-button", githubIcon);
     });
 
-    const decorateInlineResearchLinks = (selector, brandClass) => {
-      document.querySelectorAll(selector).forEach((link) => {
+    const decorateInlineResearchLinks = (links, brandClass) => {
+      links.forEach((link) => {
         link.classList.add("inline-brand-link", brandClass);
       });
     };
 
-    decorateInlineResearchLinks('.paper .links a[href*="arxiv.org"]', "brand-arxiv");
-    decorateInlineResearchLinks('.paper .links a[href*="doi.org"]', "brand-doi");
+    decorateInlineResearchLinks(arxivLinks, "brand-arxiv");
+    decorateInlineResearchLinks(doiLinks, "brand-doi");
+  };
+
+  const setupConceptPanelVisibility = () => {
+    if (!conceptPanels.length) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      conceptPanels.forEach((panel) => {
+        panel.classList.add("is-in-view");
+      });
+      return;
+    }
+
+    const viewportMargin = 160;
+    const setPanelVisibility = (panel, visible) => {
+      panel.classList.toggle("is-in-view", visible);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setPanelVisibility(entry.target, entry.isIntersecting || entry.intersectionRatio > 0);
+        });
+      },
+      { rootMargin: `${viewportMargin}px 0px` }
+    );
+
+    conceptPanels.forEach((panel) => {
+      const rect = panel.getBoundingClientRect();
+      const initiallyVisible =
+        rect.bottom >= -viewportMargin && rect.top <= window.innerHeight + viewportMargin;
+      setPanelVisibility(panel, initiallyVisible);
+      observer.observe(panel);
+    });
   };
 
   const getInitialTheme = () => {
@@ -288,26 +358,24 @@
   };
 
   const updateMenuToggleLabel = () => {
-    const toggle = document.querySelector("[data-menu-toggle]");
-    if (!toggle) {
+    if (!menuToggle) {
       return;
     }
     const lang = document.documentElement.lang === "ja" ? "ja" : "en";
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
     const label = getMenuToggleLabel(lang, isOpen);
-    toggle.setAttribute("aria-label", label);
-    toggle.setAttribute("title", label);
+    menuToggle.setAttribute("aria-label", label);
+    menuToggle.setAttribute("title", label);
   };
 
   const updateThemeToggleLabel = () => {
-    const toggles = document.querySelectorAll("[data-theme-toggle]");
-    if (!toggles.length) {
+    if (!themeToggles.length) {
       return;
     }
     const lang = document.documentElement.lang === "ja" ? "ja" : "en";
     const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
     const label = getThemeToggleLabel(lang, theme);
-    toggles.forEach((toggle) => {
+    themeToggles.forEach((toggle) => {
       toggle.setAttribute("aria-label", label);
       toggle.setAttribute("title", label);
     });
@@ -330,7 +398,7 @@
     window.localStorage.setItem("lang", normalized);
     applyTranslations(normalized);
 
-    document.querySelectorAll("[data-lang-toggle]").forEach((toggle) => {
+    langToggles.forEach((toggle) => {
       toggle.textContent = normalized === "en" ? "日本語" : "English";
       toggle.setAttribute(
         "aria-label",
@@ -345,17 +413,18 @@
   const initialTheme = getInitialTheme();
   setTheme(initialTheme, { persist: false });
 
+  setupConceptPanelVisibility();
   const initial = getInitialLang();
   setLang(initial);
 
-  document.querySelectorAll("[data-lang-toggle]").forEach((button) => {
+  langToggles.forEach((button) => {
     button.addEventListener("click", () => {
       const next = document.documentElement.lang === "en" ? "ja" : "en";
       setLang(next);
     });
   });
 
-  document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+  themeToggles.forEach((button) => {
     button.addEventListener("click", () => {
       const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
       setTheme(next);
