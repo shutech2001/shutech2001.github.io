@@ -20,31 +20,53 @@
       return;
     }
 
-    const activeFilters = new Set();
+    const filterBits = new Map();
+    let nextBit = 1;
+
+    buttons.forEach((button) => {
+      const value = button.dataset.filter;
+      if (!value || value === "all" || filterBits.has(value)) {
+        return;
+      }
+      filterBits.set(value, nextBit);
+      nextBit <<= 1;
+    });
+
+    const itemTargets = items.map((item) => {
+      let mask = 0;
+      (item.dataset.tags || "")
+        .split(/\s+/)
+        .map((tag) => tag.trim())
+        .filter(Boolean)
+        .forEach((tag) => {
+          mask |= filterBits.get(tag) || 0;
+        });
+      return { element: item, mask };
+    });
+
+    let activeMask = 0;
 
     const syncButtons = () => {
       buttons.forEach((button) => {
         const value = button.dataset.filter;
-        const isActive = value === "all" ? activeFilters.size === 0 : activeFilters.has(value);
+        const bit = filterBits.get(value) || 0;
+        const isActive = value === "all" ? activeMask === 0 : Boolean(activeMask & bit);
         button.classList.toggle("active", isActive);
         button.setAttribute("aria-pressed", String(isActive));
       });
     };
 
     const applyFilters = () => {
-      items.forEach((item) => {
-        const tagList = (item.dataset.tags || "")
-          .split(" ")
-          .map((tag) => tag.trim())
-          .filter(Boolean);
-        const matches =
-          activeFilters.size === 0 || Array.from(activeFilters).every((tag) => tagList.includes(tag));
-        item.hidden = !matches;
+      itemTargets.forEach(({ element, mask }) => {
+        const matches = activeMask === 0 || (mask & activeMask) === activeMask;
+        if (element.hidden !== !matches) {
+          element.hidden = !matches;
+        }
       });
     };
 
     const resetAll = () => {
-      activeFilters.clear();
+      activeMask = 0;
       syncButtons();
       applyFilters();
     };
@@ -59,15 +81,19 @@
 
       const selected = target.dataset.filter;
       if (selected === "all") {
+        if (activeMask === 0) {
+          return;
+        }
         resetAll();
         return;
       }
 
-      if (activeFilters.has(selected)) {
-        activeFilters.delete(selected);
-      } else {
-        activeFilters.add(selected);
+      const bit = filterBits.get(selected);
+      if (!bit) {
+        return;
       }
+
+      activeMask = activeMask & bit ? activeMask & ~bit : activeMask | bit;
 
       syncButtons();
       applyFilters();

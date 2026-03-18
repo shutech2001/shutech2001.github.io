@@ -672,6 +672,7 @@ main {
 .card {
   position: relative;
   overflow: hidden;
+  contain: layout;
   background: var(--card-soft);
   border: 1px solid var(--line);
   border-radius: 20px;
@@ -880,6 +881,7 @@ main > section:first-child {
 .profile-block {
   position: relative;
   overflow: hidden;
+  contain: layout;
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 16px 18px;
@@ -941,6 +943,7 @@ main > section:first-child {
   --concept-accent-line: rgba(37, 99, 235, 0.26);
   position: relative;
   overflow: hidden;
+  contain: layout;
   display: grid;
   gap: 16px;
   align-content: start;
@@ -953,6 +956,14 @@ main > section:first-child {
     var(--card-soft);
   box-shadow: var(--elev-shadow), var(--ring-soft);
   transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.concept-panel svg * {
+  animation-play-state: paused;
+}
+
+.concept-panel.is-in-view svg * {
+  animation-play-state: running;
 }
 
 .concept-panel::before {
@@ -1395,6 +1406,7 @@ main > section:first-child {
 .paper {
   position: relative;
   overflow: hidden;
+  contain: layout;
   display: grid;
   gap: 12px;
   border: 1px solid var(--line);
@@ -1906,6 +1918,7 @@ footer {
 
 .table-scroll {
   overflow-x: auto;
+  contain: paint;
   -webkit-overflow-scrolling: touch;
 }
 
