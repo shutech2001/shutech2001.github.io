@@ -30,7 +30,18 @@
               <time datetime="2026-06-25">2026-06-25</time>
             </p>
           </div>
-          <img class="hero-portrait" src="figs/myimage.png" alt="Portrait of Shu Tamano" />
+          <picture>
+            <source srcset="figs/myimage-360.webp" type="image/webp" />
+            <img
+              class="hero-portrait"
+              src="figs/myimage-360.jpg"
+              width="177"
+              height="360"
+              alt="Portrait of Shu Tamano"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
       </section>
 
