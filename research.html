@@ -17,29 +17,40 @@
     <div id="site-header"></div>
 
     <main class="container">
-      <section class="hero reveal" style="--delay: 0.05s">
-        <h1 data-i18n="research.title">Selected Papers</h1>
-      </section>
+      <section class="card reveal collapsible-card" style="--delay: 0.15s" data-collapsible data-collapsible-open>
+        <div class="collapsible-header">
+          <h2 class="section-title" data-i18n="research.title">Papers (Selected)</h2>
+          <button
+            class="collapsible-toggle"
+            type="button"
+            aria-expanded="true"
+            aria-controls="papers-section-content"
+            data-collapsible-toggle
+          >
+            <span class="collapsible-icon" aria-hidden="true"></span>
+            <span class="sr-only">Toggle section</span>
+          </button>
+        </div>
+        <div class="collapsible-content" id="papers-section-content" data-collapsible-content>
+        <div class="filter-bar" data-filter-scope="#papers-list">
+          <button class="filter-button active" type="button" data-filter="all" data-i18n="filter.all">
+            All
+          </button>
+          <button class="filter-button" type="button" data-filter="lead" data-i18n="filter.lead">
+            Lead Author
+          </button>
+          <button class="filter-button" type="button" data-filter="corresponding" data-i18n="filter.corresponding">
+            Corresponding Author
+          </button>
+          <button class="filter-button" type="button" data-filter="last" data-i18n="filter.last">
+            Last Author
+          </button>
+          <button class="filter-button" type="button" data-filter="peer" data-i18n="filter.peer">
+            Peer-reviewed
+          </button>
+        </div>
 
-      <div class="filter-bar" data-filter-scope="#papers-list">
-        <button class="filter-button active" type="button" data-filter="all" data-i18n="filter.all">
-          All
-        </button>
-        <button class="filter-button" type="button" data-filter="lead" data-i18n="filter.lead">
-          Lead Author
-        </button>
-        <button class="filter-button" type="button" data-filter="corresponding" data-i18n="filter.corresponding">
-          Corresponding Author
-        </button>
-        <button class="filter-button" type="button" data-filter="last" data-i18n="filter.last">
-          Last Author
-        </button>
-        <button class="filter-button" type="button" data-filter="peer" data-i18n="filter.peer">
-          Peer-reviewed
-        </button>
-      </div>
-
-      <section class="grid" id="papers-list">
+        <div class="conference-list" id="papers-list">
         <article class="paper reveal" style="--delay: 0.15s" data-tags="lead">
           <h3>
             <a
@@ -331,6 +342,44 @@
             <a class="button" href="https://github.com/shutech2001/DOLCE" target="_blank" rel="noopener" data-i18n="research.github">
               GitHub Repo
             </a>
+          </div>
+        </article>
+
+        <article class="paper reveal" style="--delay: 0.25s" data-tags="peer">
+          <h3>
+            <a
+              class="paper-title-link"
+              href="https://doi.org/10.1186/s41182-026-01000-x"
+              target="_blank"
+              rel="noopener"
+            >
+            Modelling the Impacts of Meteorological Factors on Herpangina: A Bayesian Spatiotemporal Analysis (2026)
+            </a>
+          </h3>
+          <div class="tag-row">
+            <span class="tag-badge peer" data-i18n="tag.peer">Peer-reviewed</span>
+          </div>
+          <div class="links">
+            <span data-i18n="research.links">Links</span>:
+            <a href="https://doi.org/10.1186/s41182-026-01000-x" target="_blank" rel="noopener">
+              <span data-i18n="research.doi">DOI</span>
+            </a>
+          </div>
+          <div class="citation-box">
+            <div class="section-title" data-i18n="research.citation">Citation</div>
+            <p class="meta">
+              Sophearen Ith, <span class="author-name">Shu Tamano</span>, Yui Tomo, Fangyu Yan, Yu Takizawa, Kanako Otani, Taro Kamigaki, Motoi Suzuki, Daisuke Yoneoka (2026). Modelling the Impacts of Meteorological Factors on Herpangina: A Bayesian Spatiotemporal Analysis. Tropical Medicine and Health.
+            </p>
+          </div>
+          <div>
+            <a
+              class="button"
+              href="bibtex/ith2026modelling.bib"
+              target="_blank"
+              rel="noopener"
+              data-i18n="research.bibtex"
+              >BibTeX</a
+            >
           </div>
         </article>
 
@@ -645,12 +694,26 @@
             >
           </div>
         </article>
+        </div>
+        </div>
       </section>
 
-      
 
-      <section class="card reveal" style="--delay: 0.35s">
-        <h2 class="section-title" data-i18n="research.conferenceTitle">Conferences</h2>
+      <section class="card reveal collapsible-card" style="--delay: 0.35s" data-collapsible>
+        <div class="collapsible-header">
+          <h2 class="section-title" data-i18n="research.conferenceTitle">Conferences</h2>
+          <button
+            class="collapsible-toggle"
+            type="button"
+            aria-expanded="true"
+            aria-controls="conference-section-content"
+            data-collapsible-toggle
+          >
+            <span class="collapsible-icon" aria-hidden="true"></span>
+            <span class="sr-only">Toggle section</span>
+          </button>
+        </div>
+        <div class="collapsible-content" id="conference-section-content" data-collapsible-content>
         <div class="filter-bar" data-filter-scope="#conference-list">
           <button class="filter-button active" type="button" data-filter="all" data-i18n="filter.all">
             All
@@ -1327,10 +1390,24 @@
             </ul>
           </article>
         </div>
+        </div>
       </section>
 
-      <section class="card reveal" style="--delay: 0.45s">
-        <h2 class="section-title" data-i18n="research.otherSeminars">Other Seminars</h2>
+      <section class="card reveal collapsible-card" style="--delay: 0.45s" data-collapsible>
+        <div class="collapsible-header">
+          <h2 class="section-title" data-i18n="research.otherSeminars">Other Seminars</h2>
+          <button
+            class="collapsible-toggle"
+            type="button"
+            aria-expanded="true"
+            aria-controls="seminars-section-content"
+            data-collapsible-toggle
+          >
+            <span class="collapsible-icon" aria-hidden="true"></span>
+            <span class="sr-only">Toggle section</span>
+          </button>
+        </div>
+        <div class="collapsible-content" id="seminars-section-content" data-collapsible-content>
         <div class="conference-list">
           <article class="paper">
             <h3>
@@ -1408,6 +1485,7 @@
               </li>
             </ul>
           </article>
+        </div>
         </div>
       </section>
     </main>

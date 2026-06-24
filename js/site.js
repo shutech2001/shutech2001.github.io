@@ -10,7 +10,9 @@
       "menu.close": "Close menu",
       "nav.links": "Links",
       "home.tag": "Ph.D. candidate · Researcher",
+      "home.lastUpdated": "Last Updated",
       "home.profileTitle": "Profile",
+      "home.contactLead": "Please feel free to contact me:",
       "label.name": "Name",
       "label.position": "Position",
       "label.affiliation": "Affiliation",
@@ -57,7 +59,7 @@
       "cv.label.agency": "Agency",
       "cv.label.program": "Program",
       "cv.label.category": "Category",
-      "research.title": "Selected Papers",
+      "research.title": "Papers (Selected)",
       "research.note": "",
       "research.conferenceTitle": "Conferences (Selected)",
       "research.conferenceNote": "",
@@ -109,7 +111,9 @@
       "menu.close": "メニューを閉じる",
       "nav.links": "リンク",
       "home.tag": "博士後期課程・研究員",
+      "home.lastUpdated": "最終更新日",
       "home.profileTitle": "プロフィール",
+      "home.contactLead": "気軽にご連絡ください：",
       "label.name": "名前",
       "label.position": "身分",
       "label.affiliation": "所属",
@@ -222,6 +226,7 @@
   const arxivLinks = Array.from(document.querySelectorAll('.paper .links a[href*="arxiv.org"]'));
   const doiLinks = Array.from(document.querySelectorAll('.paper .links a[href*="doi.org"]'));
   const conceptPanels = Array.from(document.querySelectorAll(".concept-panel"));
+  const collapsibleSections = Array.from(document.querySelectorAll("[data-collapsible]"));
 
   const getInitialLang = () => {
     const urlLang = new URLSearchParams(window.location.search).get("lang");
@@ -333,6 +338,67 @@
     });
   };
 
+  const getCollapsibleTitle = (section) => {
+    return section.querySelector(".collapsible-header .section-title")?.textContent.trim() || "section";
+  };
+
+  const getCollapsibleToggleLabel = (section, expanded) => {
+    const lang = document.documentElement.lang === "ja" ? "ja" : "en";
+    const title = getCollapsibleTitle(section);
+    if (lang === "ja") {
+      return expanded ? `${title}を閉じる` : `${title}を開く`;
+    }
+    return expanded ? `Collapse ${title}` : `Expand ${title}`;
+  };
+
+  const updateCollapsibleToggleLabel = (section) => {
+    const button = section.querySelector("[data-collapsible-toggle]");
+    if (!button) {
+      return;
+    }
+    const expanded = button.getAttribute("aria-expanded") === "true";
+    const label = getCollapsibleToggleLabel(section, expanded);
+    button.setAttribute("aria-label", label);
+    button.setAttribute("title", label);
+  };
+
+  const updateCollapsibleToggleLabels = () => {
+    collapsibleSections.forEach(updateCollapsibleToggleLabel);
+  };
+
+  const setCollapsibleState = (section, expanded) => {
+    const button = section.querySelector("[data-collapsible-toggle]");
+    const content = section.querySelector("[data-collapsible-content]");
+    if (!button || !content) {
+      return;
+    }
+    content.hidden = !expanded;
+    button.setAttribute("aria-expanded", String(expanded));
+    section.classList.toggle("is-expanded", expanded);
+    section.classList.toggle("is-collapsed", !expanded);
+    updateCollapsibleToggleLabel(section);
+  };
+
+  const setupCollapsibleSections = () => {
+    if (!collapsibleSections.length) {
+      return;
+    }
+
+    collapsibleSections.forEach((section) => {
+      const button = section.querySelector("[data-collapsible-toggle]");
+      const content = section.querySelector("[data-collapsible-content]");
+      if (!button || !content) {
+        return;
+      }
+
+      setCollapsibleState(section, section.hasAttribute("data-collapsible-open"));
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        setCollapsibleState(section, !expanded);
+      });
+    });
+  };
+
   const getInitialTheme = () => {
     const stored = window.localStorage.getItem("theme");
     if (supportedThemes.includes(stored)) {
@@ -407,6 +473,7 @@
     });
     updateThemeToggleLabel();
     updateMenuToggleLabel();
+    updateCollapsibleToggleLabels();
     decorateResearchActionLinks();
   };
 
@@ -414,6 +481,7 @@
   setTheme(initialTheme, { persist: false });
 
   setupConceptPanelVisibility();
+  setupCollapsibleSections();
   const initial = getInitialLang();
   setLang(initial);
 
