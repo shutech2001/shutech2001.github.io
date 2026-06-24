@@ -645,7 +645,7 @@ main {
 }
 
 .hero {
-  --hero-portrait-size: clamp(88px, 9vw, 120px);
+  --hero-portrait-size: clamp(128px, 14vw, 180px);
   display: block;
 }
 
@@ -680,6 +680,12 @@ main {
   line-height: 1.45;
   max-width: 68ch;
   white-space: nowrap;
+}
+
+.hero .last-updated {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
 }
 
 .hero-portrait {
@@ -741,6 +747,84 @@ main {
   flex: 1;
   height: 1px;
   background: linear-gradient(90deg, var(--line) 0%, transparent 100%);
+}
+
+.collapsible-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.collapsible-header .section-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+.collapsible-card.is-collapsed .collapsible-header {
+  margin-bottom: 0;
+}
+
+.collapsible-toggle {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--button-bg);
+  color: var(--muted);
+  cursor: pointer;
+  box-shadow: var(--ring-soft);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease, color 0.2s ease;
+}
+
+.collapsible-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-active-border);
+  background: var(--button-hover-bg);
+  color: var(--accent);
+  box-shadow: var(--hover-shadow);
+}
+
+.collapsible-toggle:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.collapsible-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.collapsible-icon::before,
+.collapsible-icon::after {
+  content: "";
+  position: absolute;
+  inset: 6px 1px auto;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.collapsible-icon::after {
+  transform: rotate(90deg);
+}
+
+.collapsible-toggle[aria-expanded="true"] .collapsible-icon::after {
+  opacity: 0;
+  transform: rotate(90deg) scaleX(0.2);
+}
+
+.collapsible-content {
+  animation: fadeUp 0.22s ease both;
 }
 
 .kv {
@@ -943,6 +1027,12 @@ main > section:first-child {
 .profile-affil {
   font-weight: 600;
   margin-bottom: 8px;
+}
+
+.contact-note {
+  margin: 20px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
 }
 
 .list {
@@ -1859,7 +1949,7 @@ footer {
 
 @media (max-width: 720px) {
   .hero {
-    --hero-portrait-size: clamp(68px, 20vw, 92px);
+    --hero-portrait-size: clamp(96px, 28vw, 132px);
   }
 
   .hero-lockup {
