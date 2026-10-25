@@ -1816,6 +1816,11 @@ main > section:first-child {
   gap: 18px;
 }
 
+html[lang="ja"] #conference-section-content,
+html[lang="ja"] #conference-section-content * {
+  font-family: "Times New Roman", var(--jp-round);
+}
+
 .lang-en {
   display: inline;
 }
